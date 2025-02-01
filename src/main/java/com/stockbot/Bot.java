@@ -17,16 +17,15 @@ public class Bot {
 
         log.info("Starting Bot...");
 
-        CommandHandler commandHandler = new CommandHandler();
-        CommandRegistry.registerCommands(commandHandler);
-
         Config config = new Config();
-
         final String DISCORD_TOKEN = config.getDiscordBotToken();
-        final String FINNHUB_API_KEY = config.getFinnhubApiKey();
+        final String FINNHUB_TOKEN = config.getFinnhubApiKey();
+
+        CommandHandler commandHandler = new CommandHandler();
+        CommandRegistry commandRegistry = new CommandRegistry(FINNHUB_TOKEN);
+        commandRegistry.registerCommands(commandHandler);
 
         JDABuilder builder = JDABuilder.createDefault(DISCORD_TOKEN);
-
         builder.addEventListeners(commandHandler);
         builder.enableIntents(GatewayIntent.MESSAGE_CONTENT);
         builder.setActivity(Activity.playing("Trading stocks!"));
