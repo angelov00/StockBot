@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 public class WatchlistService {
 
     private static final Logger logger = LoggerFactory.getLogger(WatchlistService.class);
-    private static final int NOTIFY_INTERVAL = 1;
+    private static final int NOTIFY_INTERVAL = 120;
     private static final TimeUnit NOTIFY_INTERVAL_UNIT = TimeUnit.MINUTES;
 
     private final Map<Guild, List<String>> watchlist = new ConcurrentHashMap<>();
