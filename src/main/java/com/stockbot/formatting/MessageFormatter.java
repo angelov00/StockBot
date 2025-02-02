@@ -12,7 +12,7 @@ public class MessageFormatter {
 
     public static MessageEmbed createStockQuoteEmbed(StockQuoteResponse response) {
         EmbedBuilder embed = new EmbedBuilder();
-        embed.setTitle("Stock Quote for AAPL");
+        embed.setTitle("Stock Quote for " + response.getTickerSymbol());
         embed.setColor(Color.GREEN);
 
         embed.addField("Current Price", "$" + response.getCurrentPrice(), true);
@@ -76,7 +76,7 @@ public class MessageFormatter {
     public static MessageEmbed createStockSymbolEmbed(StockSymbol symbol) {
         EmbedBuilder embed = new EmbedBuilder();
         embed.setTitle("Stock Symbol Info");
-        embed.setColor(0x00FF00); // You can change this color
+        embed.setColor(Color.GREEN);
 
         embed.addField("Symbol", symbol.getSymbol(), true);
         embed.addField("Description", symbol.getDescription(), true);

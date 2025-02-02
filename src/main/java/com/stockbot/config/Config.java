@@ -29,7 +29,6 @@ public class Config {
         try (InputStream input = new FileInputStream(configFilePath)) {
             properties.load(input);
         } catch (IOException ex) {
-            ex.printStackTrace();
             throw new RuntimeException("Cannot open config file: " + configFilePath, ex);
         }
     }

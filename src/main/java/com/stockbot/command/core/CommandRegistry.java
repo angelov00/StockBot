@@ -2,20 +2,31 @@ package com.stockbot.command.core;
 
 import com.stockbot.command.*;
 import com.stockbot.service.StockDataService;
+import com.stockbot.service.WatchlistService;
+
+import java.util.List;
 
 public class CommandRegistry {
 
     private final StockDataService stockDataService;
+    private final WatchlistService watchlistService;
 
-    public CommandRegistry(String finnhubApiKey) {
-        this.stockDataService = new StockDataService(finnhubApiKey);
+    public CommandRegistry(StockDataService stockDataService, WatchlistService watchlistService) {
+        this.stockDataService = stockDataService;
+        this.watchlistService = watchlistService;
     }
 
     public void registerCommands(CommandHandler handler) {
-        handler.addCommand(new PingCommand());
-        handler.addCommand(new StockQuoteCommand(stockDataService));
-        handler.addCommand(new SymbolLookupCommand(stockDataService));
-        handler.addCommand(new MarketStatusCommand(stockDataService));
-        handler.addCommand(new CompanyProfileCommand(stockDataService));
+        List<Command> commands = List.of(
+                new PingCommand(),
+                new StockQuoteCommand(stockDataService),
+                new SymbolLookupCommand(stockDataService),
+                new MarketStatusCommand(stockDataService),
+                new CompanyProfileCommand(stockDataService),
+                new AddToWatchlistCommand(watchlistService),
+                new RemoveFromWatchlistCommand(watchlistService)
+        );
+
+        commands.forEach(handler::addCommand);
     }
 }

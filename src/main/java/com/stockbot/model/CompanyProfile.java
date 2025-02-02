@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CompanyProfile {
+
     private String country;
     private String currency;
     private String exchange;
@@ -23,5 +24,4 @@ public class CompanyProfile {
     private String logo;
     @JsonProperty("finnhubIndustry")
     private String category;
-
 }
